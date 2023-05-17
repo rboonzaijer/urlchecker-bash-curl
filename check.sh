@@ -20,11 +20,11 @@ CSV_SEPARATOR=';' \
 		&& PATH_HEADERS="$OUTPUT_DIR/details/$NOW.$FILENAME.headers.txt" \
 		&& PATH_BODY="$OUTPUT_DIR/details/$NOW.$FILENAME.body.html" \
 		&& echo -n $URL > $PATH_URL \
-		&& curl --output $PATH_BODY --dump-header $PATH_HEADERS --max-redirs 20 --max-time 20 --retry 3 --location --fail --silent $URL \
+		&& curl --output $PATH_BODY --dump-header $PATH_HEADERS --max-redirs 20 --max-time 10 --retry 3 --location --silent $URL \
 		&& RESULTS=$(cat $PATH_HEADERS | grep -Ei '^http\/|^location\:' | sed -e ':a;N;$!ba;s/\n/| /g' | sed -e 's/\s\+/ /g') \
 		&& echo -n $RESULTS >> $RUN_FILENAME \
 		&& echo "" >> $RUN_FILENAME \
-		&& echo $RESULTS | sed -e 's/\s\+/ /g' \
+		&& echo $RESULTS | sed -e 's/\s|\s\+/,/g' | sed -e 's/location: \+//gI' \
 		; done \
 	&& echo -e "\ndone: $RUN_FILENAME\n\n"
 

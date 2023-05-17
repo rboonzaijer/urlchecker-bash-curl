@@ -1,10 +1,28 @@
 # Url checker with bash & curl
 
-- Collects status codes (+redirects) in CSV
-- Collects headers for each url
-- Collects body for each url
+- Collect HTTP status codes, redirects, body and headers for a given list or urls.
 
-# Setup
+# Example
+
+### Console output
+
+![](examples/example-console.png)
+
+### For each run: 1 csv with all status codes
+
+- /results_{datetime_started}/url_statuscodes_{datetime_started}.csv
+
+![](examples/example-csv.png)
+
+### For each url:
+
+- /results_{datetime_started}/details/{datetime_now}.{url_slug}.body.html (contains the HTML body)
+- /results_{datetime_started}/details/{datetime_now}.{url_slug}.headers.txt (contains all headers)
+- /results_{datetime_started}/details/{datetime_now}.{url_slug}.url.txt (the original url)
+
+![](examples/example-details.png)
+
+# Clone / Setup
 ```
 git clone git@github.com:rboonzaijer/urlchecker-bash-curl.git
 
@@ -14,7 +32,6 @@ chmod +x check.sh
 
 [ ! -f urls.txt ] && cp examples/urls.example.txt urls.txt
 
-
 # NOTE: Set your own urls in 'urls.txt'
 ```
 
@@ -22,19 +39,3 @@ chmod +x check.sh
 ```
 ./check.sh
 ```
-
-# Results
-
-## For each run
-
-- /results_{datetime_started}/url_statuscodes_{datetime_started}.csv
-
-![](examples/example-csv.png)
-
-## For each url
-
-- /results_{datetime_started}/details/{datetime_now}.{url_slug}.body.html (contains the HTML body)
-- /results_{datetime_started}/details/{datetime_now}.{url_slug}.headers.txt (contains all headers)
-- /results_{datetime_started}/details/{datetime_now}.{url_slug}.url.txt (the original url)
-
-![](examples/example-details.png)

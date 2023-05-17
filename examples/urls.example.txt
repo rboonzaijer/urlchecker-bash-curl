@@ -1,2 +1,3 @@
-http://google.com
-http://bing.com
+https://www.google.com
+https://google.com/404
+http://247web.nl
